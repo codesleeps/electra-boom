@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerPro Electrical - Contractor Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                <span>PowerPro</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-section="dashboard"><i class="fas fa-home"></i> Dashboard</li>
+                <li data-section="customers"><i class="fas fa-users"></i> Customers</li>
+                <li data-section="jobs"><i class="fas fa-tools"></i> Jobs</li>
+                <li data-section="electricians"><i class="fas fa-user-hard-hat"></i> Electricians</li>
+                <li data-section="quotes"><i class="fas fa-file-invoice-dollar"></i> Quotes</li>
+                <li data-section="invoices"><i class="fas fa-receipt"></i> Invoices</li>
+                <li data-section="payments"><i class="fas fa-credit-card"></i> Payments</li>
+                <li data-section="reports"><i class="fas fa-chart-bar"></i> Reports</li>
+            </ul>
+            <div class="user-profile">
+                <img src="https://placehold.co/40x40" alt="User">
+                <div>
+                    <span class="username">Admin User</span>
+                    <span class="user-role">Administrator</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Section (Default View) -->
+            <section id="dashboard" class="content-section active">
+                <h1>Dashboard</h1>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Active Jobs</div>
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$12,450</div>
+                        <div class="stat-label">Revenue Today</div>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Available Techs</div>
+                        <i class="fas fa-user-hard-hat"></i>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">15</div>
+                        <div class="stat-label">Pending Quotes</div>
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="recent-jobs">
+                        <h2>Recent Jobs</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job ID</th>
+                                    <th>Customer</th>
+                                    <th>Address</th>
+                                    <th>Technician</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dashboard-jobs-tbody">
+                                <!-- Filled by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="quick-actions">
+                        <h2>Quick Actions</h2>
+                        <button id="new-customer-btn" class="action-btn">
+                            <i class="fas fa-user-plus"></i> New Customer
+                        </button>
+                        <button id="new-job-btn" class="action-btn">
+                            <i class="fas fa-plus-circle"></i> New Job
+                        </button>
+                        <button id="new-quote-btn" class="action-btn">
+                            <i class="fas fa-file-invoice"></i> New Quote
+                        </button>
+                        <button id="new-invoice-btn" class="action-btn">
+                            <i class="fas fa-file-invoice-dollar"></i> New Invoice
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="customers" class="content-section">
+                <div class="section-header">
+                    <h1>Customers</h1>
+                    <button id="add-customer-btn" class="primary-btn">Add Customer</button>
+                </div>
+                <div class="search-filter">
+                    <input type="text" id="customer-search" placeholder="Search customers...">
+                    <select id="customer-filter">
+                        <option value="all">All Customers</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Jobs</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customers-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Jobs Section -->
+            <section id="jobs" class="content-section">
+                <div class="section-header">
+                    <h1>Jobs</h1>
+                    <button id="add-job-btn" class="primary-btn">Create Job</button>
+                </div>
+                <div class="job-filters">
+                    <select id="job-status-filter">
+                        <option value="all">All Statuses</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <input type="date" id="job-date-filter">
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Customer</th>
+                            <th>Address</th>
+                            <th>Technician</th>
+                            <th>Scheduled</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jobs-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Electricians Section -->
+            <section id="electricians" class="content-section">
+                <div class="section-header">
+                    <h1>Electricians</h1>
+                    <button id="add-electrician-btn" class="primary-btn">Add Electrician</button>
+                </div>
+                <div class="tech-status">
+                    <div class="status-indicator available">8 Available</div>
+                    <div class="status-indicator assigned">12 On Jobs</div>
+                    <div class="status-indicator unavailable">4 Unavailable</div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Current Job</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="electricians-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Quotes Section -->
+            <section id="quotes" class="content-section">
+                <div class="section-header">
+                    <h1>Quotes</h1>
+                    <button id="add-quote-btn" class="primary-btn">Create Quote</button>
+                </div>
+                <div class="quote-filters">
+                    <select id="quote-status-filter">
+                        <option value="all">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="expired">Expired</option>
+                    </select>
+                    <input type="date" id="quote-date-filter">
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Quote #</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Created</th>
+                            <th>Expires</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quotes-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Invoices Section -->
+            <section id="invoices" class="content-section">
+                <div class="section-header">
+                    <h1>Invoices</h1>
+                    <button id="add-invoice-btn" class="primary-btn">Create Invoice</button>
+                </div>
+                <div class="invoice-filters">
+                    <select id="invoice-status-filter">
+                        <option value="all">All Statuses</option>
+                        <option value="unpaid">Unpaid</option>
+                        <option value="partially-paid">Partially Paid</option>
+                        <option value="paid">Paid</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <input type="date" id="invoice-date-filter">
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoices-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Payments Section -->
+            <section id="payments" class="content-section">
+                <div class="section-header">
+                    <h1>Payments</h1>
+                    <button id="record-payment-btn" class="primary-btn">Record Payment</button>
+                </div>
+                <div class="payment-stats">
+                    <div class="payment-stat">
+                        <span class="stat-label">Today's Payments</span>
+                        <span class="stat-value">$12,450</span>
+                    </div>
+                    <div class="payment-stat">
+                        <span class="stat-label">This Week</span>
+                        <span class="stat-value">$38,720</span>
+                    </div>
+                    <div class="payment-stat">
+                        <span class="stat-label">This Month</span>
+                        <span class="stat-value">$142,890</span>
+                    </div>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>Invoice #</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Date</th>
+                            <th>Received By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="payments-table-body">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <h1>Reports</h1>
+                <div class="report-options">
+                    <div class="report-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Revenue Report</h3>
+                        <p>View revenue by period, customer, or service type</p>
+                        <button class="secondary-btn report-generate-btn">Generate</button>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-user-clock"></i>
+                        <h3>Technician Efficiency</h3>
+                        <p>Analyze technician performance and job completion</p>
+                        <button class="secondary-btn report-generate-btn">Generate</button>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <h3>Accounts Receivable</h3>
+                        <p>View outstanding invoices and aging reports</p>
+                        <button class="secondary-btn report-generate-btn">Generate</button>
+                    </div>
+                    <div class="report-card">
+                        <i class="fas fa-tools"></i>
+                        <h3>Job Analysis</h3>
+                        <p>Breakdown of job types, durations, and profitability</p>
+                        <button class="secondary-btn report-generate-btn">Generate</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal Overlay (Hidden by default) -->
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal" id="modal">
+                <!-- Modal content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
